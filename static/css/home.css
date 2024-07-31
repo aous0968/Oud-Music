@@ -1,0 +1,21 @@
+.header-home {
+ 
+}
+.header{
+  margin: 10px;
+  font-family: "CairoBold";
+}
+.app-name {
+  position: absolute;
+  margin: 30px;
+  color: black;
+  background-color: 
+  rgba(91, 91, 91, 0.5);
+  border-radius: 5px;
+  display: none;
+}
+.my-card {
+  margin: 3%;
+  color: white;
+  background-color: #1c1c1c;
+}

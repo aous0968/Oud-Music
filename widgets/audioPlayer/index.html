@@ -1,0 +1,44 @@
+<!-- vars : track , exclude_details=True  -->
+
+<!-- Load the custom CSS style file in the main html file -->
+
+<div class="player" id="player_{{track.slug}}">
+
+  <!-- Define the section for displaying details -->
+  {% if not exclude_details %}
+    <div class="details">
+      <div class="track-art">
+        <img src="{{track.track_img.url}}" alt="{{track.name}}">
+      </div>
+      <div class="track-name">Track Name</div>
+      <div class="track-artist">Track Artist</div>
+    </div>
+  {% else %}
+    <div class="track-art" hidden>
+      <img src="{{track.track_img.url}}" alt="{{track.name}}">
+    </div>
+  {% endif %}
+
+  <!-- Define the section for displaying track buttons -->
+  <div class="buttons">
+    <div class="playpause-track">
+      <i class="fa fa-play-circle fa-2x"></i>
+    </div>
+  </div>
+
+  <!-- Define the section for displaying the seek slider-->
+  <div class="slider_container">
+    <div class="current-time">00:00</div>
+    <input type="range" min="1" max="100" value="0" class="seek_slider">
+    <div class="total-duration">00:00</div>
+  </div>
+
+  <!-- Define the section for displaying the volume slider-->
+  <div class="slider_container">
+    <i class="fa fa-volume-down"></i>
+    <input type="range" min="1" max="100" value="99" class="volume_slider">
+    <i class="fa fa-volume-up"></i>
+  </div>
+</div>
+
+<!-- Load the main script for the player in the main html file-->

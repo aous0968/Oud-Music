@@ -1,0 +1,74 @@
+{% extends "controlPanleBase.html" %}
+
+{% block title %}
+    Tracks Control Panle
+{% endblock title %}
+
+{% block main_title %}
+    Tracks Control Panle
+{% endblock  %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row row-base row-table" style="color:white;">
+            <div class="col-md-2 col-12 flex-center table-cell-first">
+                Image
+            </div>
+            
+            <div class="col-md-2 col-12 flex-center table-cell">
+               Name
+            </div>
+
+            <div class="col-md-2 col-4 flex-center table-cell">
+                Downloads
+            </div>
+
+            <div class="col-md-2 col-4 flex-center table-cell">
+                Likes
+            </div>
+
+            <div class="col-md-2 col-4 flex-center table-cell">
+                Times_played
+            </div>
+
+            <div class="col-md-2 col-12 flex-center table-cell">
+                CreatedAt
+            </div>
+        </div>         
+        {% for track in tracks %}
+            <div class="row row-base" style="color:white;">
+                <div class="col-md-2 col-12 flex-center">
+                    <img src="{{track.track_img.url}}" alt="track.name" class="img-base">
+                </div>
+                
+                <div class="col-md-2 col-12 flex-center">
+                    {% if track.slug %}
+                        <a href="{% url "trackDetail" slug=track.slug %}">
+                            {{track.name}}
+                        </a>
+                    {% else %}
+                        {{track.name}} <p style="opacity:0.6; font-size:12px">(has no slug)</p>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-2 col-4 flex-center">
+                    {{track.downloads}}
+                </div>
+
+                <div class="col-md-2 col-4 flex-center">
+                    {{track.likes}}
+                </div>
+
+                <div class="col-md-2 col-4 flex-center">
+                    {{track.times_played}}
+                </div>
+
+                <div class="col-md-2 col-12 flex-center">
+                    {{track.createdAt}}
+                </div>
+            </div>                     
+        {% endfor %}
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>
+        {{track.name}}
+    </title>
+{% endblock title %}
+{% block stylesheets  %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/tracks/detail.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "widgets/css/audio.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="color: var(--color3);margin-top: 15px;">
+    <div>
+        <img src="{{track.track_img.url}}" class="img-fluid detail-img">
+    </div>
+    <div class="detail-track-name">
+        {{track.name}}
+    </div>
+    <div style="margin: 10px;margin-inline-start: 0;">
+        <span class="detail-icon-container" style="margin-inline-start:0;">
+            <i class="fa-solid fa-download"></i> {{track.downloads}}  
+        </span>
+        -
+        <span class="detail-icon-container">
+            <i class="fa-solid fa-thumbs-up"></i>  {{track.likes}} 
+        </span>
+        -
+        <span class="detail-icon-container">
+            <i class="fa-solid fa-rotate-right"></i>  {{track.times_played}} 
+        </span>
+    </div>
+    <div style="opacity:0.6;">{{track.createdAt}}</div>
+    {% include "audioPlayer/index.html" with track=track exclude_details=True %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+        {{ block.super }}
+
+         <!-- Load the main scripts for the player -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+         <script src="{% static "widgets/js/AudioPlayer.js" %}"></script>
+
+
+        <script>
+           window.onload = () => {
+                   var track_body_class = document.querySelector("#player_{{track.slug}}");
+                   var track_real_image = document.querySelector("#player_{{track.slug}} img");
+                   var track_image_class = document.querySelector("#player_{{track.slug}} .track-art");
+                   var track_name_class = document.querySelector("#player_{{track.slug}} .track-name");
+                   var track_artist_class = document.querySelector("#player_{{track.slug}} .track-artist");
+                   var playpause_btn = document.querySelector("#player_{{track.slug}} .playpause-track");
+                   var next_btn = document.querySelector("#player_{{track.slug}} .next-track");
+                   var prev_btn = document.querySelector("#player_{{track.slug}} .prev-track");
+                   var seek_slider = document.querySelector("#player_{{track.slug}} .seek_slider");
+                   var volume_slider = document.querySelector("#player_{{track.slug}} .volume_slider");
+                   var curr_time = document.querySelector("#player_{{track.slug}} .current-time");
+                   var total_duration = document.querySelector("#player_{{track.slug}} .total-duration");
+
+                   let track = new AudioPalyer("{{track.track.url}}", "{{track.track_img.url}}" , "{{track.name}}" , "OudMusic", track_image_class , track_real_image , track_name_class , track_artist_class , track_body_class , playpause_btn , seek_slider , volume_slider , curr_time , total_duration , "{{track.slug}}");
+           }
+
+        </script>
+{% endblock %}

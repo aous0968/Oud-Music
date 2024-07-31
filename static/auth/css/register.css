@@ -1,0 +1,26 @@
+.form-container {
+  padding: 10%;
+}
+.login-form {
+  width: 80%;
+  background: #313131;
+  color: white;
+  border: none;
+  border-left: 1px solid #1c1c1c;
+  border-right: 1px solid #1c1c1c;
+  border-radius: 0;
+}
+input {
+  background-color: #313131 !important;
+  color: white !important;
+  border-right: none !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+input::placeholder {
+  color: white !important;
+  opacity: 0.3 !important;
+}
+.login-input {
+  display: flex;
+}

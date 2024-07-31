@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets  %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/tracks/add.css" %}?v=0.1"/>
+    <link rel="stylesheet" href="{% static "css/forms.css" %}?v=0.1"/>
+{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-center form-container"> 
+        <form method="POST" class="form-control form"  enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{form.errors}}
+            <div>
+                {{formErrors}}
+            </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{form.non_field_errors}}</div>
+            {% endif %}
+            {% for field in form %}
+                    <div id="{{field.label}}">
+                        <div>{{field.label_tag|title}}</div>
+        
+                        <div class="form-input" id="{{field.name}}">
+                        {{field}}
+                        </div>
+                        
+                        {{field.errors}}
+                    </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-auth-form mt-3">Add</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+        {{ block.super }}
+{% endblock %}
