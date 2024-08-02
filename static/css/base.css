@@ -48,6 +48,7 @@ body {
 .btn-auth-form{
     color: var(--color2);
     background-color: var(--color3);
+    max-width: 150px;
 }
 .btn-auth-form:hover{
     color: var(--color3);
@@ -80,7 +81,8 @@ footer {
 :root {
   --color1: #313131;
   --color2: #111;
-  --color3:   white;
+  --color3: white;
+  --color4:   #263f40;
   /* --light-bg: ghostwhite;
   --light-color: darkslategray;
   --light-code: tomato; */

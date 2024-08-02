@@ -18,6 +18,7 @@ urlpatterns = [
     path("login/username-validation/", username_validation , name="username_validation"),
     path("logout/", auth_views.LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL), name="logout"),
     path("password-reset/", ResetPasswordView.as_view(), name="password_reset"),
+     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name ='password_reset_done'),
     path("password-reset-confirm/<uidb64>/<token>/",  auth_views.PasswordResetConfirmView.as_view(template_name='registration/reset/password_reset_confirm.html'),
          name='password_reset_confirm'),
     path('password-reset-complete/',

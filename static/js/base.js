@@ -1,6 +1,6 @@
 const bodyStyle = document.body.style;
-let dark_colors = ["#313131", "#111", "white"];
-let light_colors = ["#bdbdbd", "#fff", "black"];
+let dark_colors = ["#313131", "#111", "white" , "#263f40"];
+let light_colors = ["#bdbdbd", "#fff", "black" , "#93a9aa"];
 
 if (localStorage.getItem('lightDarkMode') == 'light') {
     changeColors(bodyStyle, light_colors);
