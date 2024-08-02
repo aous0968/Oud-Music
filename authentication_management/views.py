@@ -1,4 +1,6 @@
 import json
+
+from django.db import IntegrityError
 from .forms import RegisterForm, CustomAuthenticationForm
 
 from django.shortcuts import render, redirect
@@ -60,6 +62,9 @@ def register(request, *args, **kwargs):
     if request.user.is_authenticated:
         return redirect('home')
     form = RegisterForm(request.POST or None)
+
+    context = {'form': form}
+
     if request.POST:
         if form.is_valid():
             user_name = form.cleaned_data['username']
@@ -67,13 +72,17 @@ def register(request, *args, **kwargs):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            get_user_model().objects.create_user(username=user_name, email=email,
-                                                 password=password, first_name=first_name, last_name=last_name)
+            try:
+                get_user_model().objects.create_user(username=user_name, email=email,
+                                                    password=password, first_name=first_name, last_name=last_name)
+            except IntegrityError:
+                form.add_error(None , "user name must be unipue")
+                return render(request, "registration/register.html", context)
+                
             user = authenticate(username=user_name, password=password)
             login(request, user)
             return redirect("My_login")
 
-    context = {'form': form}
     return render(request, "registration/register.html", context)
 
 @csrf_exempt
@@ -81,15 +90,21 @@ def username_unique(request):
     if request.method == "POST":
         user_name = request.POST.get('req_data')
         data = {
-            "massage": "There is a user with this user name.",
+            "massage": "user name must be unique",
             "good": False
         }
         try:
+            user_name = user_name.strip()
+            if user_name.isspace() or not user_name:
+                raise Exception("empty string")
             User.objects.get(username=user_name)
         except User.DoesNotExist:
             data["massage"] = "the user name is valid."
             data["good"] = True
             return HttpResponse(json.dumps(data))
+        except : 
+            return HttpResponse(json.dumps(data))
+
 
         return HttpResponse(json.dumps(data))
 

@@ -1,6 +1,7 @@
 .form-container {
   padding: 10%;
 }
+
 .login-form {
   width: 80%;
   background: #313131;
@@ -10,6 +11,7 @@
   border-right: 1px solid #1c1c1c;
   border-radius: 0;
 }
+
 input {
   background-color: #313131 !important;
   color: white !important;
@@ -17,10 +19,27 @@ input {
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
+
 input::placeholder {
   color: white !important;
   opacity: 0.3 !important;
 }
+
 .login-input {
   display: flex;
+}
+
+.username-unique{
+  color: #65fc51;
+  font-weight: bold;
+  font-size: medium;
+  padding: 5px;
+  border: 1px solid;
+  border-top: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.not{
+  color: #ff4545;
 }
